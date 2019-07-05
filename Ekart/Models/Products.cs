@@ -10,5 +10,6 @@ namespace Ekart.Models
         public string ProductCategory { get; set; }
         public string ProductName { get; set; }
         public string ProductPrice { get; set; }
+
     }
 }

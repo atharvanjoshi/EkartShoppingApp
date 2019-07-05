@@ -11,7 +11,7 @@ namespace Ekart
         {
             InitializeComponent();
 
-            MainPage = new ProductsListPage();
+            MainPage = new NavigationPage(new ProductListPage());
         }
 
         protected override void OnStart()

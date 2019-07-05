@@ -8,6 +8,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms.Extended;
+using XLabs.Forms.Behaviors;
+using XLabs.Forms.Controls;
 
 namespace Ekart.ViewModels
 {
@@ -18,6 +20,8 @@ namespace Ekart.ViewModels
         readonly DataService dataService=new DataService();
         private bool _isBusy;
         private const int PageSize = 10;
+        public RelayGesture DumpGesture { get; set; }
+        public bool IsLoadingVisible { get; set; }
         public bool IsBusy
         {
             get => _isBusy;
@@ -31,6 +35,8 @@ namespace Ekart.ViewModels
 
         public MainViewModel()
         {
+            IsLoadingVisible = true;
+            DumpGesture = new RelayGesture(OnGesture);
             //GetProductsCollection();
             productCollection = new InfiniteScrollCollection<Products>
             {
@@ -53,7 +59,9 @@ namespace Ekart.ViewModels
                     return productCollection.Count < 44;
                 }
             };
+            IsLoadingVisible = false;
             GetProductsListAsync();
+
         }
 
         //public InfiniteScrollCollection<Products> GetProductsCollection()
@@ -99,6 +107,20 @@ namespace Ekart.ViewModels
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private async void OnGesture(GestureResult gr, object obj)
+        {
+            switch (gr.GestureType)
+            {
+                case GestureType.SingleTap:
+                    await App.Current.MainPage.DisplayAlert("Product Selected", "You've tapped once to select a product", "Okay");
+                    break;
+                
+                case GestureType.LongPress:
+                    var action = await App.Current.MainPage.DisplayActionSheet("More Options", "Cancel", null, "Share", "Add to Cart", "Add to Wish List");
+                    break;
+                
+            }
         }
     }
 }

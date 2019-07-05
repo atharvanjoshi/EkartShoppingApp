@@ -14,6 +14,7 @@
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.264807" />
     <PackageReference Include="Xamarin.Essentials" Version="1.0.1" />
     <PackageReference Include="Xamarin.Forms.Extended.InfiniteScrolling" Version="1.0.0-preview2" />
+    <PackageReference Include="XLabs.Forms" Version="2.0.5782" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ekart.Business\Ekart.Business.csproj" />
@@ -22,10 +23,5 @@
     <Folder Include="DataBase\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Controls\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Views\ProductsListPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
   </ItemGroup>
 </Project>
