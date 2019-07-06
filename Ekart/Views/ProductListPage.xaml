@@ -4,14 +4,14 @@
              xmlns:lb="clr-namespace:XLabs.Forms.Behaviors;assembly=XLabs.Forms"
              xmlns:lc="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
              Title="Search Results">
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <local:MainViewModel />
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
     <ContentPage.Content>
         <lc:GesturesContentView>
         <StackLayout>
                 
-            <ListView ItemsSource="{Binding productCollection}" x:Name="ProductsList" SeparatorVisibility="None" SelectionMode="None" HasUnevenRows="True" CachingStrategy="RecycleElement">
+                <ListView ItemsSource="{Binding productCollection}" x:Name="ProductsList" SeparatorVisibility="None" SelectionMode="None" HasUnevenRows="True" CachingStrategy="RecycleElement">
                     
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -55,6 +55,14 @@
                 </ListView.Footer>
 
             </ListView>
+                <Grid ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button BackgroundColor="Aquamarine" Text="Sort" Grid.Column="0"/>
+                    <Button BackgroundColor="Aquamarine" Text="Filter" Grid.Column="1"/>
+                </Grid>
         </StackLayout>
             </lc:GesturesContentView>
     </ContentPage.Content>

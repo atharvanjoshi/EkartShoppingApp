@@ -10,8 +10,9 @@ namespace Ekart.Views
         public ProductListPage()
         {
             InitializeComponent();
-
+            
             BindingContext = new MainViewModel();
+            
         }
         public void OnMore(object sender, EventArgs e)
         {

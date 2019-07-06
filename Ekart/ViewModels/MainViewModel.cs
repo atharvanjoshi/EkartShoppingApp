@@ -19,9 +19,18 @@ namespace Ekart.ViewModels
         public List<Products> listOfProducts;
         readonly DataService dataService=new DataService();
         private bool _isBusy;
+        private bool _isLoadingVisible=true;
         private const int PageSize = 10;
         public RelayGesture DumpGesture { get; set; }
-        public bool IsLoadingVisible { get; set; }
+        public bool IsLoadingVisible
+        {
+            get => _isLoadingVisible;
+            set
+            {
+                _isLoadingVisible = value;
+                OnPropertyChanged();
+            }
+        }
         public bool IsBusy
         {
             get => _isBusy;
@@ -35,7 +44,7 @@ namespace Ekart.ViewModels
 
         public MainViewModel()
         {
-            IsLoadingVisible = true;
+            
             DumpGesture = new RelayGesture(OnGesture);
             //GetProductsCollection();
             productCollection = new InfiniteScrollCollection<Products>
@@ -103,6 +112,7 @@ namespace Ekart.ViewModels
         {
             var products = await dataService.GetProductsAsync(pageIndex: 0, pageSize: PageSize);
             productCollection.AddRange(products);
+            IsLoadingVisible = false;
         }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
